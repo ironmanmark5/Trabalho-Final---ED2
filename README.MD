@@ -59,8 +59,8 @@ Todos os sete casos de teste serão executados automaticamente e seus resultados
 
 ## Casos de Teste
 
-| Teste | Descrição | Resultado Esperado | Status |
-|:------:|-----------|-------------------|:------:|
+| Teste | Descrição | Resultado Esperado | 
+|:------:|-----------|:-------------------:|
 | 1 | Inserção básica | Em-ordem: 2, 5, 7, 10, 12, 15, 20; Altura = 2; Nós = 7; Folhas = 4
 | 2 | Busca | 7 e 12 encontrados; 99 e 1 não encontrados
 | 3 | Menor e maior | Menor = 2; Maior = 20

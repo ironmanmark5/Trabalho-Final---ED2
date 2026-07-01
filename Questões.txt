@@ -1,0 +1,32 @@
+1. Por que o percurso em-ordem de uma BST gera os valores em ordem crescente?
+    O percurso em-ordem  de uma BST gera os valores em ordem crescente devido à combinação da sua estratégia de visitação com a propriedade estrutural da árvore. O algoritmo segue rigorosamente a sequência de processar primeiro toda a subárvore esquerda, depois o nó corrente (raiz local) e, por fim, toda a subárvore direita. 
+    
+    Como a regra fundamental da BST determina que todos os elementos menores que um nó ficam obrigatoriamente à sua esquerda e todos os maiores ficam à sua direita, a execução recursiva dessa estratégia garante que o menor elemento possível de qualquer ramificação seja sempre o primeiro a ser visitado. Dessa forma, ao priorizar sistematicamente o caminho mais à esquerda antes de registrar o valor do nó atual e seguir para a direita, o percurso naturalmente lineariza os dados do menor para o maior.
+
+2. Qual a diferença entre uma árvore binária comum e uma árvore binária de busca?
+    Uma árvore binária comum tem a estrura de grafos conexos e sem ciclos com a regra que cada nó possui no máximo dois filhos, um a esquerda e outro a direita. Agora uma árvore binária de busca tem a regra de valores onde os menores ficam à esquerda e os maiores ficam à direita. (comum == sem regra da disposição de números, busca == com a regra)
+
+3. Por que a altura da árvore influencia o desempenho?
+    Porque a altura está relacionada com o pior cenário possível, Big O, o caminho mais longo que o algoritmo terá que percorrer para encontrar, inserir ou remover um elemento. Portanto, a altura determina o número máximo de operações que serão realizadas. Logo, menor algura significa operações mais rápidas.
+
+4. O que acontece quando os valores são inseridos já ordenados?
+    Acontece o pior cenário de uma BST, ela se degenera em uma lista. E justamente por se tornar uma lista na prática, se perde as vantagens de se utilizar uma árvore como estrutura de dados. O tempo de busca que seria O(log n) que é rápido, passa a ser proporcional ao número de elementos da árvore, O(n) que não é o ideal.
+
+5. Qual o custo médio esperado para busca em uma BST balanceada?
+    É de O(log n), onde n é o número total de nós na árvore.
+
+    Como o algoritmo de busca divide o problema pela metade a cada decisão tomada, o número máximo de comparações necessárias para encontrar um elemento é igual à altura da árvore.
+
+6. Qual o pior caso para busca em uma BST degenerada?
+    É O(n).
+    
+    Isso ocorre quando os elementos são inseridos em uma ordem que a faz crescer em um única direção. Sem ramificações, a árvore perde sua estrutura bidimensional e passa a se comportar linearmente, como uma lista.
+
+7. Explique os três casos de remoção.
+    A operação de remoçao precisa reorganizar as referências dos nós para garantir que a propriedade fundamental da BST não seja violado. Os três casos são, O nó a ser removido é um nó folha, possuir apenas um filho ou possuir dois filhos.
+
+    O primeiro cenário ocorre quando o nó a ser removido é um nó folha, ou seja, ele não possui nenhum filho. Este é o caso mais simples de se resolver, pois sua exclusão não deixa ramificações órfãs na árvore. O algoritmo simplesmente identifica que o nó possui ambas as referências para a esquerda e para a direita vazias e o elimina da memória. Para o nó pai, a função retorna um valor nulo, cortando imediatamente o vínculo que existia com a folha excluída.  
+    
+    O segundo cenário trata dos nós que possuem apenas um filho, seja ele posicionado no lado esquerdo ou no lado direito. Para efetuar a remoção sem quebrar a árvore, o único filho do nó excluído é promovido para ocupar o lugar de seu pai na hierarquia, conectando-se diretamente ao nó avô. No código, isso é feito através de uma verificação simples: se o lado esquerdo for nulo, a função retorna o filho da direita; se o lado direito for nulo, ela retorna o filho da esquerda. Esse nó sobrevivente é repassado diretamente para a referência do pai antigo, mantendo o restante do galho intacto.  
+    
+    O terceiro e mais complexo cenário surge quando o nó a ser removido possui dois filhos. Nessa situação, não é possível simplesmente promover um dos filhos diretamente, pois isso deixaria os nós do outro lado sem uma conexão válida. Para resolver esse impasse, o projeto adota a estratégia de buscar um substituto perfeito na árvore utilizando o sucessor em-ordem, que corresponde ao menor nó localizado na subárvore direita. O algoritmo navega até essa subárvore e desce todo o caminho para a esquerda até encontrar o menor valor dali. O valor desse sucessor é copiado e sobrescreve o valor do nó que se desejava remover. Por fim, para eliminar o valor duplicado que restou no final da árvore, a função faz uma chamada recursiva para remover o nó sucessor original de sua posição antiga. Como o menor nó de uma subárvore por definição nunca possui um filho esquerdo, essa segunda remoção cairá obrigatoriamente em um dos dois casos anteriores mais simples, finalizando o processo com sucesso.
